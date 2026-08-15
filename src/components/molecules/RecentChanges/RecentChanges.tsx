@@ -1,14 +1,34 @@
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import { FiSearch } from "react-icons/fi";
 import Input from '@/components/atoms/Input/Input';
 import ItemBox from '@/components/atoms/ItemBox/ItemBox';
 import { IChange } from '@/lib/models/Change';
 
-interface RecentChangesProps {
+type RecentChangesProps = {
   changes: IChange[] | null;
-}
+};
 
 const RecentChanges = ({ changes }: RecentChangesProps) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredChanges = useMemo(() => {
+    if (!changes) return [];
+    if (!searchTerm) return changes;
+    
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    return changes.filter((change) =>
+      change.title.toLowerCase().includes(lowerSearchTerm)
+    );
+  }, [changes, searchTerm]);
+
+  console.log('All changes:', changes);
+  console.log('Filtered changes:', filteredChanges);
+  console.log('Search term:', searchTerm);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="flex flex-col items-center w-full p-4">
       <div className="relative">
@@ -20,9 +40,11 @@ const RecentChanges = ({ changes }: RecentChangesProps) => {
           placeholder="Search Recent Changes..."
           required
           search={true}
+          value={searchTerm}
+          onChange={handleSearch}
         />
       </div>
-      {changes && changes.map((change, index) => (
+      {filteredChanges && filteredChanges.map((change, index) => (
         <ItemBox
           key={index}
           title={change.title}

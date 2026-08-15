@@ -16,7 +16,7 @@ const Next = ({ changes }: NextProps) => {
       <div className="flex flex-col justify-center items-center gap-4 w-full ">
       <ContentField>
         <NextMessage />
-        <RecentChanges changes={changes} />
+        <RecentChanges changes={changes}/>
       </ContentField>
       </div>
     </div>

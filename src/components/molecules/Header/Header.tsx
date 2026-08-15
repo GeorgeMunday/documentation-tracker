@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Input from '@/components/atoms/Input/Input';
 import Text from '@/components/atoms/Text/Text';
 
@@ -6,6 +6,12 @@ import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
+  };
+
   return (
     <div className="flex justify-between items-center gap-4 p-4 w-full border-b border-gray-200">
       <div className="flex items-center gap-4">
@@ -39,6 +45,8 @@ const Header = () => {
           placeholder="Search Keywords"
           required
           search={true}
+          value={searchTerm}
+          onChange={handleSearch}
         />
       </div>
     </div>
