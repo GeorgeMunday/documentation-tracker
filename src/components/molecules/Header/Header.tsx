@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
-import Input from '@/components/atoms/Input/Input';
+import React from 'react';
 import Text from '@/components/atoms/Text/Text';
 
-import { FiSearch } from "react-icons/fi";
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const pathname = usePathname();
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
+  const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/next', label: 'NextJs' },
+    { href: '/mongo', label: 'Mongo DB' },
+  ];
 
   return (
     <div className="flex justify-between items-center gap-4 p-4 w-full border-b border-gray-200">
@@ -24,30 +25,24 @@ const Header = () => {
         </Text>
       </div>
 
-       <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-8">
-        <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/">
-          Home
-        </Link>
-        <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/next">
-          NextJs
-        </Link>
-        <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/mongo">
-          Mongo DB
-        </Link>
-      </div>
+      <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-8">
+        {navItems.map(({ href, label }) => {
+          const isActive = pathname === href;
 
-      <div className="relative">
-        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-
-        <Input
-          name="search"
-          type="text"
-          placeholder="Search Keywords"
-          required
-          search={true}
-          value={searchTerm}
-          onChange={handleSearch}
-        />
+          return (
+            <Link
+              key={href}
+              href={href}
+              aria-current={isActive ? 'page' : undefined}
+              className={[
+                'text-lg font-semibold transition-colors duration-300',
+                isActive ? 'text-green-500' : 'text-black hover:text-green-500 active:text-green-500',
+              ].join(' ')}
+            >
+              {label}
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

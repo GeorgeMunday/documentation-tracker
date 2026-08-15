@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import Text from '@/components/atoms/Text/Text';
 
 const WelcomeMessage = () => {
   return (
-    <div className="flex flex-col justify-center items-center gap-4 py-4 w-full">
+    <div className="flex w-full flex-col items-center justify-center gap-3 px-2 py-4 text-center sm:gap-4">
       <Text size="lg" weight="bold" color="black">
         Welcome Back to DocTracker!
       </Text>
@@ -11,7 +11,7 @@ const WelcomeMessage = () => {
         Your one-stop solution for tracking and managing your documentation.
       </Text>
     </div>
-  )
-}
+  );
+};
 
-export default WelcomeMessage
+export default WelcomeMessage;
