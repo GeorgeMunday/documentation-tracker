@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongo/connection";
 
+export const revalidate = 120;
+
 export async function GET() {
     try {
     const conn = await connectDB();

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongo/connection";
 
+export const revalidate = 120;
+
 export async function GET() {
-    try {
+  try {
     const conn = await connectDB();
     const db = conn.connection.db;
     if (!db) {
@@ -14,14 +16,11 @@ export async function GET() {
     const collection = db.collection("changes");
     const changes = await collection.find({}).toArray();
     return NextResponse.json(changes);
-    } catch (error) {
+  } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-        {
-        error: "MongoDB unavailable",
-        details: message,
-        },
-        { status: 503 }
+      { error: "MongoDB unavailable", details: message },
+      { status: 503 }
     );
-    }
+  }
 }
