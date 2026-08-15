@@ -1,36 +1,47 @@
 "use client";
+import React, {useState, useEffect} from 'react'
+
 import Home from '@/components/organisms/Home/Home';
+
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
-// import { apiRequest } from '@/lib/hooks/useApi/useApi';
-// import { useEffect } from 'react';
+import { apiRequest } from '@/lib/hooks/useApi/useApi';
+import { IChange } from '@/lib/models/Change';
 
-export default function Page() {
+const Page = () => {
   const isOnline = useOnlineStatus();
+  const [changes, setChanges] = useState<IChange[] | null>(null);
 
-  // useEffect(() => {
-  //   if (!isOnline) {
-  //     return;
-  //   }
+    useEffect(() => {
+    if (!isOnline) {
+      return;
+    }
 
-  //   async function fetchChanges() {
-  //     const { data, error } = await apiRequest('/api/changes/add', {
-  //       method: 'POST',
-  //     });
+    async function fetchChanges() {
+      const { data, error } = await apiRequest<IChange[]>('/api/changes/all', {
+        method: 'GET',
+      });
 
-  //     if (error) {
-  //       console.warn('Changes sync unavailable:', error);
-  //       return;
-  //     }
+      if (error) {
+        console.warn('Changes sync unavailable:', error);
+        return;
+      }
 
-  //     console.log('Changes sync status:', data);
-  //   }
+      console.log('Changes sync status:', data);
+      return setChanges(data);
+    }
 
-  //   fetchChanges();
-  // }, [isOnline]);
+    fetchChanges();
+  }, [isOnline]);
 
   if (isOnline) {
-    return <Home />;
+    return (
+      <>
+        <Home changes={changes} />
+      </>
+    )
+  } else {
+    return <>you are offline</>;
   }
-
-  return <>you are offline</>;
 }
+
+export default Page
