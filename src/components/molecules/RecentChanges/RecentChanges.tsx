@@ -21,10 +21,6 @@ const RecentChanges = ({ changes }: RecentChangesProps) => {
     );
   }, [changes, searchTerm]);
 
-  console.log('All changes:', changes);
-  console.log('Filtered changes:', filteredChanges);
-  console.log('Search term:', searchTerm);
-
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
