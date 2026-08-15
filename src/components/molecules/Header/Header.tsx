@@ -14,7 +14,7 @@ const Header = () => {
         </Text>
 
         <Text size="md" weight="normal" color="gray-500">
-          Track your documentation with ease
+          Track documentation with ease
         </Text>
       </div>
 
@@ -22,11 +22,11 @@ const Header = () => {
         <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/">
           Home
         </Link>
-        <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/mongo">
-          Mongo DB
-        </Link>
         <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/next">
           NextJs
+        </Link>
+        <Link className="text-lg font-semibold text-black hover:text-green-500 transition-colors duration-300" href="/mongo">
+          Mongo DB
         </Link>
       </div>
 
@@ -36,7 +36,7 @@ const Header = () => {
         <Input
           name="search"
           type="text"
-          placeholder="Search Recent Changes"
+          placeholder="Search Keywords"
           required
           search={true}
         />

@@ -1,10 +1,19 @@
+"use client";
 import Next from '@/components/organisms/Next/Next'
-import React from 'react'
+import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 
 const Page = () => {
-  return (
-    <Next />
-  )
+  const isOnline = useOnlineStatus();
+
+  if (isOnline) {
+    return (
+      <>
+        <Next />
+      </>
+    )
+  } else {
+    return <>you are offline</>;
+  }
 }
 
 export default Page

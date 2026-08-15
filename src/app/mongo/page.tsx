@@ -1,10 +1,19 @@
+"use client";
 import Mongo from '@/components/organisms/Mongo/Mongo'
-import React from 'react'
+import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 
 const Page = () => {
-  return (
-    <Mongo />
-  )
+  const isOnline = useOnlineStatus();
+
+  if (isOnline) {
+    return (
+      <>
+        <Mongo />
+      </>
+    )
+  } else {
+    return <>you are offline</>;
+  }
 }
 
 export default Page

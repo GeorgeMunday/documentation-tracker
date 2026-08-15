@@ -1,7 +1,7 @@
 import ContentField from '@/components/molecules/ContentField/ContentField';
 import Header from '@/components/molecules/Header/Header';
+import NextMessage from '@/components/molecules/NextMessage/NextMessage';
 import RecentChanges from '@/components/molecules/RecentChanges/RecentChanges';
-import WelcomeMessage from '@/components/molecules/WelcomeMessage/WelcomeMessage';
 
 const Next = () => {
   return (
@@ -9,7 +9,7 @@ const Next = () => {
       <Header />
       <div className="flex flex-col justify-center items-center gap-4 w-full ">
       <ContentField>
-        <WelcomeMessage />
+        <NextMessage />
         <RecentChanges />
       </ContentField>
       </div>
