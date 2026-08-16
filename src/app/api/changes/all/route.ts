@@ -14,7 +14,7 @@ export async function GET() {
       );
     }
     const collection = db.collection("changes");
-    const changes = await collection.find({}).toArray();
+    const changes = await collection.find({}).limit(3).toArray();
     return NextResponse.json(changes);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);

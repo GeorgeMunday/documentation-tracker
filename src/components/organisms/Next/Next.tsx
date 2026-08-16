@@ -1,7 +1,7 @@
 import ContentField from '@/components/molecules/ContentField/ContentField';
 import Header from '@/components/molecules/Header/Header';
-import NextMessage from '@/components/molecules/NextMessage/NextMessage';
 import RecentChanges from '@/components/molecules/RecentChanges/RecentChanges';
+import WelcomeMessage from '@/components/molecules/WelcomeMessage/WelcomeMessage';
 import { IChange } from '@/lib/models/Change';
 
 interface NextProps {
@@ -15,8 +15,8 @@ const Next = ({ changes }: NextProps) => {
       <Header />
       <div className="flex flex-col justify-center items-center gap-4 w-full ">
       <ContentField>
-        <NextMessage />
-        <RecentChanges changes={changes}/>
+        <WelcomeMessage title="Most Recent Next.js Changes" message="Next.js version: 13.0.0 Next.js Docs: https://nextjs.org/docs" />
+        <RecentChanges changes={changes} />
       </ContentField>
       </div>
     </div>
