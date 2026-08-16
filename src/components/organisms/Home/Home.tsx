@@ -13,7 +13,7 @@ const Home = ({ changes }: HomeProps) => {
   return (
     <div>
       <Header />
-      <div className="flex flex-col justify-center items-center gap-4 w-full ">
+      <div className="flex flex-col justify-center items-center gap-4 w-full">
       <ContentField>
         <WelcomeMessage />
         <RecentChanges changes={changes} />

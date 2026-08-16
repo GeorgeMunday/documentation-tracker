@@ -17,9 +17,11 @@ const ItemBox = ({ title, description, timestamp }: ItemBoxProps) => {
         <Text size="md" weight="normal" color="black">
           {description || 'information about the change'}
         </Text>
-        <Text size="sm" weight="normal" color="gray-500">
-          {timestamp || '2023-01-01 12:00:00'}
-        </Text>
+        {timestamp && (
+          <Text size="sm" weight="normal" color="gray-500">
+            {timestamp}
+          </Text>
+        )}
       </div>
     </div>
   );
