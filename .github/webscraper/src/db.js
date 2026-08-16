@@ -33,10 +33,18 @@ function getMongoUri() {
 
 export async function insertNewChangesOnly(changes) {
   const mongoUri = getMongoUri();
+  const total = new Set(changes.map((change) => change.id)).size;
+
   if (!mongoUri) {
-    throw new Error(
-      "Missing MONGODB_URI. Set it in environment or in project .env.local."
+    console.error(
+      "MONGODB_URI not configured. Skipping Mongo sync and continuing scrape output only."
     );
+    return {
+      inserted: 0,
+      existing: total,
+      total,
+      skipped: true,
+    };
   }
 
   await mongoose.connect(mongoUri, { bufferCommands: false });
@@ -74,6 +82,7 @@ export async function insertNewChangesOnly(changes) {
       inserted: newChanges.length,
       existing: dedupedChanges.length - newChanges.length,
       total: dedupedChanges.length,
+      skipped: false,
     };
   } finally {
     await mongoose.disconnect();
