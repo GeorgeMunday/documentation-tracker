@@ -84,32 +84,6 @@ Components (atoms → molecules → organisms)
 Pages
 ```
 
-### Layer Breakdown
-
-1. **Data Layer** (`lib/`)
-   - `mongo/connection.ts`: MongoDB connection management
-   - `models/Change.ts`: Data model definitions
-   - `hooks/`: Custom React hooks for data fetching and state management
-
-2. **API Layer** (`app/api/`)
-   - Route handlers that query MongoDB and return JSON responses
-   - Endpoints for retrieving changes filtered by source (all, Next.js, MongoDB)
-
-3. **UI Component Layer** (`components/`)
-   - **Atoms**: Fundamental building blocks (Button, Input, Text, ItemBox)
-   - **Molecules**: Combinations of atoms (Header, ContentField, Form)
-   - **Organisms**: Feature-complete sections (Home, Search, Mongo, Next, Information)
-
-4. **Page Layer** (`app/`)
-   - Server components that orchestrate page layout
-   - Client components that render organisms
-
-### State Management
-
-- **Server State**: Managed via Next.js server components and API routes
-- **Client State**: Managed through React hooks and component state
-- **Async Data**: Fetched via `useApi` hook which handles loading, error, and data states
-
 ## Getting Started
 
 ### Prerequisites
@@ -148,30 +122,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 npm run build
 npm start
 ```
-
-## Pages
-
-- **Home** (`/`): Main dashboard with welcome message and recent changes
-- **Information** (`/information`): API information and documentation
-- **Next** (`/next`): Next.js specific changes and updates
-- **Mongo** (`/mongo`): MongoDB specific changes and updates
-- **Search** (`/search`): Search through all tracked changes
-
-## API Endpoints
-
-- `GET /api/changes/all` - Get all API changes
-- `GET /api/changes/next` - Get Next.js specific changes
-- `GET /api/changes/mongo` - Get MongoDB specific changes
-
-## Development
-
-### Project Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run type-check` - TypeScript type checking
 
 ## GitHub Actions
 
