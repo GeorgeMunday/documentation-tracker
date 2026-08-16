@@ -1,4 +1,4 @@
-# API Tracker
+# Documentation Tracker
 
 A Next.js application that tracks and monitors changes to APIs (Next.js and MongoDB) with real-time updates and search functionality.
 
