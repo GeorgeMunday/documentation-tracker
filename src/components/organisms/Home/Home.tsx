@@ -4,10 +4,9 @@ import RecentChanges from '@/components/molecules/RecentChanges/RecentChanges';
 import WelcomeMessage from '@/components/molecules/WelcomeMessage/WelcomeMessage';
 import { IChange } from '@/lib/models/Change';
 
-interface HomeProps {
+type HomeProps = {
   changes: IChange[] | null;
-}
-  
+};
 
 const Home = ({ changes }: HomeProps) => {
   return (
