@@ -1,8 +1,6 @@
 import {NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongo/connection";
 
-export const revalidate = 120;
-
 export async function GET(NextRequest: NextRequest) {
   const { searchParams } = new URL(NextRequest.url);
 
