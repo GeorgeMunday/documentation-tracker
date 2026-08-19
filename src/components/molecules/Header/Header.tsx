@@ -14,6 +14,7 @@ const Header = () => {
     { href: '/next', label: 'NextJs' },
     { href: '/mongo', label: 'Mongo DB' },
     { href: '/search', label: 'Search' },
+    { href: '/all', label: 'All' },
     { href: '/information', label: 'Info' },
   ];
 

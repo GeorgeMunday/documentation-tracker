@@ -1,20 +1,21 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 
-import Home from '@/components/organisms/Home/Home';
-
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import { apiRequest } from '@/lib/hooks/useApi/useApi';
 import { IChange } from '@/lib/models/Change';
 import LoadingState from '@/components/organisms/LoadingState/LoadigState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
 import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
+import All from '@/components/organisms/All/All';
 
 const Page = () => {
   const isOnline = useOnlineStatus();
   const [changes, setChanges] = useState<IChange[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [limit] = useState(5);
+  const [skip, setSkip] = useState(0);
 
   useEffect(() => {
     if (!isOnline) {
@@ -23,7 +24,12 @@ const Page = () => {
 
     async function fetchChanges() {
       setLoading(true);
-      const { data, error } = await apiRequest<IChange[]>('/api/changes/recent', {
+      const query = new URLSearchParams({
+        limit: String(limit),
+        skip: String(skip),
+      });
+
+      const { data, error } = await apiRequest<IChange[]>(`/api/changes/all?${query.toString()}`, {
         method: 'GET',
       });
 
@@ -34,13 +40,21 @@ const Page = () => {
         return;
       }
 
-      setChanges(data ?? null);
+      setChanges((current) => {
+        if (skip === 0) return data ?? null;
+        const existing = current ?? [];
+        const merged = [...existing, ...(data ?? [])];
+        return merged.filter(
+          (item, index, array) =>
+            array.findIndex((candidate) => candidate._id === item._id) === index
+        );
+      });
       setLoading(false);
       setError(false);
     }
 
     fetchChanges();
-  }, [isOnline]);
+  }, [isOnline, limit, skip]);
 
   if (error) {
     return <ApiErrorState />;
@@ -58,7 +72,13 @@ const Page = () => {
     );
   }
 
-  return <Home changes={changes} />;
+  return (
+    <All
+      changes={changes}
+      limit={limit}
+      setSkip={setSkip}
+    />
+  );
 };
 
 export default Page;

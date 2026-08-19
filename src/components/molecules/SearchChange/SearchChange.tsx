@@ -53,6 +53,7 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
               title={change.title}
               description={change.description}
               timestamp={change.date.toString()}
+              index={index}
             />
           ))
         ) : (
