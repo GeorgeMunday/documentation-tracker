@@ -7,11 +7,14 @@ import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import { apiRequest } from '@/lib/hooks/useApi/useApi';
 import { IChange } from '@/lib/models/Change';
 import LoadingState from '@/components/organisms/LoadingState/LoadigState';
+import OfflineState from '@/components/organisms/OfflineState/OfflineState';
+import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 
 const Page = () => {
   const isOnline = useOnlineStatus();
   const [changes, setChanges] = useState<IChange[] | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
     useEffect(() => {
     if (!isOnline) {
@@ -25,17 +28,22 @@ const Page = () => {
       });
 
       if (error) {
-        console.warn('Changes sync unavailable:', error);
         setLoading(false);
+        setChanges(null);
         return;
       }
 
       setLoading(false);
+      setError(false);
       return setChanges(data);
     }
 
     fetchChanges();
   }, [isOnline]);
+
+  if (error) {
+    return <ApiErrorState />;
+  }
 
   if (loading || !changes) {
       return (
@@ -50,7 +58,7 @@ const Page = () => {
       </>
     )
   } else {
-    return <>you are offline</>;
+    return <OfflineState />;
   }
 }
 

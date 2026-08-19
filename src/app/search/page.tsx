@@ -4,14 +4,16 @@ import { useEffect, useState } from 'react';
 import { IChange } from '@/lib/models/Change';
 import { apiRequest } from '@/lib/hooks/useApi/useApi';
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
-import React from 'react';
 import LoadingState from '@/components/organisms/LoadingState/LoadigState';
+import OfflineState from '@/components/organisms/OfflineState/OfflineState';
+import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 
 const Page = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [submittedTerm, setSubmittedTerm] = useState('');
   const [changes, setChanges] = useState<IChange[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const isOnline = useOnlineStatus();
 
   useEffect(() => {
@@ -39,11 +41,13 @@ const Page = () => {
         console.warn('Changes sync unavailable:', error);
         setChanges([]);
         setLoading(false);
+        setError(true);
         return;
       }
 
       setChanges(data ?? []);
       setLoading(false);
+      setError(false);
     };
 
     fetchChanges();
@@ -53,8 +57,12 @@ const Page = () => {
     };
   }, [submittedTerm, isOnline]);
 
+  if (error) {
+    return <ApiErrorState />;
+  }
+
   if (!isOnline) {
-    return <div className="p-6 text-center text-lg font-medium text-red-500">you are offline</div>;
+    return <OfflineState />;
   }
 
   if (loading) {
