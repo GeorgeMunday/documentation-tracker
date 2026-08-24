@@ -36,9 +36,8 @@ export async function insertNewChangesOnly(changes) {
   const total = new Set(changes.map((change) => change.id)).size;
 
   if (!mongoUri) {
-    console.error(
-      "MONGODB_URI not configured. Skipping Mongo sync and continuing scrape output only."
-    );
+    throw new Error("MongoDB URI not found. Please set MONGODB_URI in your environment or in .env.local.");
+
     return {
       inserted: 0,
       existing: total,
