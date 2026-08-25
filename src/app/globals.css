@@ -25,7 +25,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-@media (min-width: 889px) {
+@media (min-width: 1227px) {
   .mobile-menu,
   .mobile-menu-button {
     display: none !important;
