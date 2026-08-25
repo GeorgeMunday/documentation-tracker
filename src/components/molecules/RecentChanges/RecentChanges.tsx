@@ -6,9 +6,10 @@ import { IChange } from '@/lib/models/Change';
 
 type RecentChangesProps = {
   changes: IChange[] | null;
+  input?: boolean;
 };
 
-const RecentChanges = ({ changes }: RecentChangesProps) => {
+const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredChanges = useMemo(() => {
@@ -27,21 +28,27 @@ const RecentChanges = ({ changes }: RecentChangesProps) => {
 
   return (
     <div className="flex w-full flex-col items-center gap-4 p-2 sm:p-4">
-      <div className="flex w-full justify-center">
-        <div className="relative w-full max-w-xl">
-          <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+      {input ? (
+        <div className="flex w-full justify-center">
+          <div className="relative w-full max-w-xl">
+            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 
-          <Input
-            name="search"
-            type="text"
-            placeholder="Search Recent Changes..."
-            required
-            search={true}
-            value={searchTerm}
-            onChange={handleSearch}
-          />
+            <Input
+              name="search"
+              type="text"
+              placeholder="Search Recent Changes..."
+              required
+              search={true}
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="flex w-full justify-center">
+          <h2 className="text-lg font-semibold">3 Most Recent Changes</h2>
+        </div>
+      )}
 
       <div className="flex w-full flex-col gap-3">
         {filteredChanges.map((change, index) => (

@@ -16,7 +16,7 @@ const Home = ({ changes }: HomeProps) => {
       <div className="flex flex-col justify-center items-center w-full">
       <ContentField>
         <WelcomeMessage />
-        <RecentChanges changes={changes} />
+        <RecentChanges changes={changes} input={false} />
         <WelcomeMessage title="Links" message="Some useful links for you to check out." />
         <Links />
       </ContentField>
