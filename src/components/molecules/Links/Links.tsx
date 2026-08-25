@@ -13,6 +13,10 @@ const Links = () => {
         {
             title: 'MongoDB Documentation',
             url: 'https://www.mongodb.com/docs/'
+        },
+        {
+            title: 'Next Documentation to be tracked',
+            url: 'https://nodejs.org/en/blog/announcements'
         }
     ];
 
