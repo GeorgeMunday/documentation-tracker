@@ -84,6 +84,37 @@ export async function queryNextChanges() {
   return changes.map((change) => toPlainChange(change));
 }
 
+export async function queryTailwindChanges() {
+  const collection = await getChangesCollection();
+  const changes = await collection
+    .find({ doctype: "tailwindcss" })
+    .sort({ date: -1 })
+    .limit(CATEGORY_LIMIT)
+    .toArray();
+
+  return changes.map((change) => toPlainChange(change));
+}
+
+export async function queryNodeChanges() {
+  const collection = await getChangesCollection();
+  const changes = await collection
+    .find({ doctype: "nodejs" })
+    .sort({ date: -1 })
+    .limit(CATEGORY_LIMIT)
+    .toArray();
+    return changes.map((change) => toPlainChange(change));
+}
+
+export async function queryTypeScriptChanges() {
+  const collection = await getChangesCollection();
+  const changes = await collection
+    .find({ doctype: "typescript" })
+    .sort({ date: -1 })
+    .limit(CATEGORY_LIMIT)
+    .toArray();
+  return changes.map((change) => toPlainChange(change));
+}
+
 export async function querySearchChanges(query: string) {
   const collection = await getChangesCollection();
   const filter = buildSearchFilter(query);

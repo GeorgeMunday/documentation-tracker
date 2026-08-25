@@ -7,8 +7,11 @@ import {
   queryAllChanges,
   queryMongoChanges,
   queryNextChanges,
+  queryNodeChanges,
   queryRecentChanges,
   querySearchChanges,
+  queryTailwindChanges,
+  queryTypeScriptChanges,
 } from "@/lib/changes/queries";
 
 export async function getAllChangesCached(limit: number, skip: number) {
@@ -45,3 +48,25 @@ export async function getSearchChangesCached(query: string) {
   cacheTag("changes", "changes-search");
   return querySearchChanges(query);
 }
+
+export async function getTailwindChangesCached() {
+  "use cache";
+  cacheLife({ revalidate: DEFAULT_CACHE_SECONDS });
+  cacheTag("changes", "changes-tailwind");
+  return queryTailwindChanges();
+}
+
+export async function getNodeChangesCached() {
+  "use cache";
+  cacheLife({ revalidate: DEFAULT_CACHE_SECONDS });
+  cacheTag("changes", "changes-node");
+  return queryNodeChanges();
+}
+
+export async function getTypeScriptChangesCached() {
+  "use cache";
+  cacheLife({ revalidate: DEFAULT_CACHE_SECONDS });
+  cacheTag("changes", "changes-typescript");
+  return queryTypeScriptChanges();
+}
+
