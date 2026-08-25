@@ -15,7 +15,7 @@ const Next = ({ changes }: NextProps) => {
       <Header />
       <div className="flex flex-col justify-center items-center gap-4 w-full ">
       <ContentField>
-        <WelcomeMessage title="Most Recent Next.js Changes" message="Next.js version: 13.0.0 Next.js Docs: https://nextjs.org/docs" />
+        <WelcomeMessage title="Most Recent Next.js Changes" message="Here are the most recent changes to Next.js." />
         <RecentChanges changes={changes} />
       </ContentField>
       </div>

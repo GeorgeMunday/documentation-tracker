@@ -14,7 +14,7 @@ const Mongo = ({ changes }: MongoProps) => {
       <Header />
       <div className="flex flex-col justify-center items-center gap-4 w-full ">
       <ContentField>
-        <WelcomeMessage title = "Most Recent MongoDB Changes" message = "MongoDB version: 6.0.6 MongoDB Docs: https://www.mongodb.com/docs" />
+        <WelcomeMessage title = "Most Recent MongoDB Changes" message = "Here are the most recent changes to MongoDB." />
         <RecentChanges changes={changes} />
       </ContentField>
       </div>
