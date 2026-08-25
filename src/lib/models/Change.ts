@@ -1,6 +1,15 @@
-import { Schema, model, models, Document, Model } from 'mongoose';
+import { Schema, model, models, Model } from 'mongoose';
 
-export interface IChange extends Document {
+export interface IChange {
+  _id: string;
+  id: string;
+  doctype: string;
+  title: string;
+  description: string;
+  date: string;
+}
+
+interface ChangeDocument {
   id: string;
   doctype: string;
   title: string;
@@ -8,7 +17,7 @@ export interface IChange extends Document {
   date: Date;
 }
 
-const changeSchema: Schema<IChange> = new Schema<IChange>({
+const changeSchema: Schema<ChangeDocument> = new Schema<ChangeDocument>({
   id: { type: String, required: true },
   doctype: { type: String, required: true },
   title: { type: String, required: true },
@@ -16,6 +25,7 @@ const changeSchema: Schema<IChange> = new Schema<IChange>({
   date: { type: Date, default: Date.now },
 });
 
-const Change: Model<IChange> = models.Change || model<IChange>('Change', changeSchema);
+const Change: Model<ChangeDocument> =
+  models.Change || model<ChangeDocument>('Change', changeSchema);
 
 export default Change;
