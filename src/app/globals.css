@@ -36,7 +36,7 @@ body {
   }
 }
 
-@media (max-width: 805px) {
+@media (max-width: 1227px) {
   .desktop-nav {
     display: none !important;
   }
