@@ -8,6 +8,9 @@ A Next.js application that tracks and monitors changes to APIs (Next.js and Mong
 - **API Support**: Track changes for:
   - Next.js
   - MongoDB
+  - Node
+  - Typescript
+  - Tailwind CSS
 - **Search**: Quickly search through tracked changes
 - **Recent Changes**: View the most recent API changes at a glance
 - **Online Status**: Display current connectivity status
