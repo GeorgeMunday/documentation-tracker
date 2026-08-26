@@ -7,16 +7,24 @@ const Links = () => {
             url: 'https://github.com/GeorgeMunday'
         },
         {
-            title: 'Next.js Documentation',
-            url: 'https://nextjs.org/docs'
+            title: 'Node.js Documentation',
+            url: 'https://nodejs.org/en/docs'
         },
         {
             title: 'MongoDB Documentation',
             url: 'https://www.mongodb.com/docs/'
         },
         {
-            title: 'Next Documentation to be tracked',
-            url: 'https://nodejs.org/en/blog/announcements'
+            title: 'Node.js Documentation',
+            url: 'https://nodejs.org/en/docs'
+        },
+        {
+            title: 'TypeScript Documentation',
+            url: 'https://www.typescriptlang.org/docs/'
+        },
+        {
+            title: 'Tailwind CSS Documentation',
+            url: 'https://tailwindcss.com/docs'
         }
     ];
 
