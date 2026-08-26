@@ -21,11 +21,16 @@ const Links = () => {
     ];
 
   return (
-    <>
+    <div className="flex w-full flex-col items-center gap-4 p-2 sm:p-4">
         {links.map((link, index) => (
-            <ItemBox key={index} title={link.title} description={link.url} />
+            <ItemBox
+                key={index}
+                title={link.title}
+                description=" "
+                link={link.url}
+            />
         ))}
-    </>
+    </div>
   )
 }
 

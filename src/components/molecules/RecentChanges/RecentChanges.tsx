@@ -58,6 +58,7 @@ const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
             description={change.description}
             timestamp={change.date.toString()}
             index={index}
+            doctype={change.doctype}
           />
         ))}
       </div>
