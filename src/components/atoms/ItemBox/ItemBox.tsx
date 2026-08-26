@@ -22,7 +22,9 @@ const ItemBox = ({ title, description, timestamp, index }: ItemBoxProps) => {
         </Text>
         </div>
         <Text size="md" weight="normal" color="black">
-          {description || 'information about the change'}
+          {description && description.length > 1000
+            ? `${description.substring(0, 1000)}...`
+            : description || 'information about the change'}
         </Text>
         {timestamp && (
           <Text size="sm" weight="normal" color="gray-500">
