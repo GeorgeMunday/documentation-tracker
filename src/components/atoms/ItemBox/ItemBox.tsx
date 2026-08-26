@@ -60,7 +60,7 @@ const ItemBox = ({ title, description, timestamp, index, doctype, link }: ItemBo
 
         {link && (
           <Link href={link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
-            <Text size="sm" color="blue-500">
+            <Text size="sm" color="green-500">
               {link}
             </Text>
           </Link>
@@ -72,7 +72,7 @@ const ItemBox = ({ title, description, timestamp, index, doctype, link }: ItemBo
               href={changeLink.documentation}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
+              className="text-green-500 hover:underline"
             >
               See all {changeLink.label}
             </Link>
