@@ -18,6 +18,7 @@ const Header = () => {
     { href: '/tailwind', label: 'Tailwind CSS' },
     { href: '/search', label: 'Search' },
     { href: '/all', label: 'All' },
+    { href: '/notify', label: 'Notify' },
     { href: '/information', label: 'Info' },
   ];
 
