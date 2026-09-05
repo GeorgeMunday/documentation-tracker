@@ -1,6 +1,6 @@
 import Input from '@/components/atoms/Input/Input'
 import Button from '@/components/atoms/Button/Button'
-import { FiArrowUp, FiSearch } from 'react-icons/fi';
+import { FiPlayCircle, FiSearch } from 'react-icons/fi';
 import React from 'react'
 import { IChange } from '@/lib/models/Change';
 import ItemBox from '@/components/atoms/ItemBox/ItemBox';
@@ -11,9 +11,10 @@ type SearchChangeProps = {
   submittedTerm?: string;
   onSearch?: () => void;
   changes: IChange[] | null;
+  loading?: boolean;
 };
 
-const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, changes }: SearchChangeProps & { changes: IChange[] | null }) => {
+const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, changes, loading }: SearchChangeProps & { changes: IChange[] | null }) => {
   const hasChanges = Boolean(changes && changes.length > 0);
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -39,8 +40,8 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
             />
           </div>
 
-          <Button onClick={onSearch} variant="primary" aria-label="Search">
-            <FiArrowUp className="h-7 w-7 text-2xl" />
+          <Button onClick={onSearch} variant="primary" aria-label="Search" disabled={loading}>
+            <FiPlayCircle className={`h-7 w-7 text-2xl${loading ? ' animate-spin' : ''}`} />
           </Button>
         </div>
       </form>

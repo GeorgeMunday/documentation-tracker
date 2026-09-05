@@ -10,10 +10,9 @@ type SearchProps = {
   submittedTerm?: string;
   onSearch?: () => void;
   changes: IChange[] | null;
-  loading?: boolean;
 };
 
-const Search = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, changes, loading }: SearchProps) => {
+const Search = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, changes }: SearchProps) => {
   return (
     <>
     <Header />
@@ -26,7 +25,6 @@ const Search = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, changes, l
           submittedTerm={submittedTerm}
           onSearch={onSearch}
           changes={changes}
-          loading={loading}
         />
       </ContentField>
       </div>

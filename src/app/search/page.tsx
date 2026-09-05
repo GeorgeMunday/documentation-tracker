@@ -65,7 +65,7 @@ const Page = () => {
     return <OfflineState />;
   }
 
-  if (loading) {
+  if (loading && !submittedTerm.trim()) {
     return <LoadingState />;
   }
 
@@ -76,6 +76,7 @@ const Page = () => {
       submittedTerm={submittedTerm}
       onSearch={() => setSubmittedTerm(searchTerm)}
       changes={changes}
+      loading={loading && Boolean(submittedTerm.trim())}
     />
   );
 };
