@@ -29,25 +29,25 @@ const Page = () => {
       const query = encodeURIComponent(submittedTerm.trim());
       const url = query ? `/api/changes/search?query=${query}` : '/api/changes/all';
 
-      const { data, error } = await apiRequest<IChange[]>(url, {
-        method: 'GET',
-      });
+      try {
+        const { data, error } = await apiRequest<IChange[]>(url, {
+          method: 'GET',
+        });
 
-      if (!isActive) {
-        return;
+        if (!isActive) return;
+
+        if (error) {
+          console.warn('Changes sync unavailable:', error);
+          setChanges([]);
+          setError(true);
+          return;
+        }
+
+        setChanges(data ?? []);
+        setError(false);
+      } finally {
+        if (isActive) setLoading(false);
       }
-
-      if (error) {
-        console.warn('Changes sync unavailable:', error);
-        setChanges([]);
-        setLoading(false);
-        setError(true);
-        return;
-      }
-
-      setChanges(data ?? []);
-      setLoading(false);
-      setError(false);
     };
 
     fetchChanges();

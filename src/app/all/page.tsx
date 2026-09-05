@@ -22,38 +22,48 @@ const Page = () => {
       return;
     }
 
+    let isActive = true;
+
     async function fetchChanges() {
       setLoading(true);
-      const query = new URLSearchParams({
-        limit: String(limit),
-        skip: String(skip),
-      });
+      try {
+        const query = new URLSearchParams({
+          limit: String(limit),
+          skip: String(skip),
+        });
 
-      const { data, error } = await apiRequest<IChange[]>(`/api/changes/all?${query.toString()}`, {
-        method: 'GET',
-      });
+        const { data, error } = await apiRequest<IChange[]>(`/api/changes/all?${query.toString()}`, {
+          method: 'GET',
+        });
 
-      if (error) {
-        setLoading(false);
-        setChanges(null);
-        setError(true);
-        return;
+        if (!isActive) return;
+
+        if (error) {
+          setChanges(null);
+          setError(true);
+          return;
+        }
+
+        setChanges((current) => {
+          if (skip === 0) return data ?? null;
+          const existing = current ?? [];
+          const merged = [...existing, ...(data ?? [])];
+          return merged.filter(
+            (item, index, array) =>
+              array.findIndex((candidate) => candidate._id === item._id) === index
+          );
+        });
+        setError(false);
+      } finally {
+        if (isActive) setLoading(false);
       }
-
-      setChanges((current) => {
-        if (skip === 0) return data ?? null;
-        const existing = current ?? [];
-        const merged = [...existing, ...(data ?? [])];
-        return merged.filter(
-          (item, index, array) =>
-            array.findIndex((candidate) => candidate._id === item._id) === index
-        );
-      });
-      setLoading(false);
-      setError(false);
     }
 
     fetchChanges();
+
+    return () => {
+      isActive = false;
+    };
   }, [isOnline, limit, skip]);
 
   if (error) {

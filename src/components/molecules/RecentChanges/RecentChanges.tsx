@@ -53,7 +53,7 @@ const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
       <div className="flex w-full flex-col gap-3">
         {filteredChanges.map((change, index) => (
           <ItemBox
-            key={index}
+            key={change._id}
             title={change.title}
             description={change.description}
             timestamp={change.date.toString()}

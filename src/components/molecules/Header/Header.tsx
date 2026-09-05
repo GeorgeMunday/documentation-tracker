@@ -5,22 +5,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaBars, FaXmark } from 'react-icons/fa6';
 
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/next', label: 'NextJs' },
+  { href: '/mongo', label: 'Mongo DB' },
+  { href: '/node', label: 'NodeJs' },
+  { href: '/typescript', label: 'TypeScript' },
+  { href: '/tailwind', label: 'Tailwind CSS' },
+  { href: '/search', label: 'Search' },
+  { href: '/all', label: 'All' },
+  { href: '/notify', label: 'Notify' },
+  { href: '/information', label: 'Info' },
+];
+
 const Header = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/next', label: 'NextJs' },
-    { href: '/mongo', label: 'Mongo DB' },
-    { href: '/node', label: 'NodeJs' },
-    { href: '/typescript', label: 'TypeScript' },
-    { href: '/tailwind', label: 'Tailwind CSS' },
-    { href: '/search', label: 'Search' },
-    { href: '/all', label: 'All' },
-    { href: '/notify', label: 'Notify' },
-    { href: '/information', label: 'Info' },
-  ];
 
   const renderNavLinks = (mobile = false) =>
     navItems.map(({ href, label }) => {

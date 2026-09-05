@@ -118,8 +118,8 @@ export async function queryTypeScriptChanges() {
 export async function querySearchChanges(query: string) {
   const collection = await getChangesCollection();
   const filter = buildSearchFilter(query);
-  const changes = await collection
-    .find(filter)
+  const searchCursor = collection.find(filter);
+  const changes = await searchCursor
     .sort({ date: -1 })
     .limit(SEARCH_LIMIT)
     .toArray();

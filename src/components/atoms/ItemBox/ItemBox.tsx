@@ -11,29 +11,30 @@ type ItemBoxProps = {
   link?: string;
 };
 
+const changeLinks: Record<string, { label: string; documentation: string }> = {
+  mongodb: {
+    label: 'View all MongoDB changes',
+    documentation: 'https://www.mongodb.com/products/updates',
+  },
+  nodejs: {
+    label: 'View all Node.js changes',
+    documentation: 'https://nodejs.org/en/blog/announcements/',
+  },
+  nextjs: {
+    label: 'View all Next.js changes',
+    documentation: 'https://nextjs.org/blog',
+  },
+  typescript: {
+    label: 'View all TypeScript changes',
+    documentation: 'https://devblogs.microsoft.com/typescript/',
+  },
+  tailwindcss: {
+    label: 'View all Tailwind CSS changes',
+    documentation: 'https://tailwindcss.com/blog',
+  },
+};
+
 const ItemBox = ({ title, description, timestamp, index, doctype, link }: ItemBoxProps) => {
-  const changeLinks: Record<string, { label: string; documentation: string }> = {
-    mongodb: {
-      label: 'View all MongoDB changes',
-      documentation: 'https://www.mongodb.com/products/updates',
-    },
-    nodejs: {
-      label: 'View all Node.js changes',
-      documentation: 'https://nodejs.org/en/blog/announcements/',
-    },
-    nextjs: {
-      label: 'View all Next.js changes',
-      documentation: 'https://nextjs.org/blog',
-    },
-    typescript: {
-      label: 'View all TypeScript changes',
-      documentation: 'https://devblogs.microsoft.com/typescript/',
-    },
-    tailwindcss: {
-      label: 'View all Tailwind CSS changes',
-      documentation: 'https://tailwindcss.com/blog',
-    },
-  };
   const changeLink = doctype ? changeLinks[doctype.toLowerCase()] : undefined;
 
   return (

@@ -49,7 +49,7 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
         {hasChanges ? (
           changes?.map((change, index) => (
             <ItemBox
-              key={`${change.title}-${index}`}
+              key={change._id}
               title={change.title}
               description={change.description}
               timestamp={change.date.toString()}

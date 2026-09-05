@@ -21,24 +21,34 @@ const Page = () => {
       return;
     }
 
+    let isActive = true;
+
     async function fetchChanges() {
       setLoading(true);
-      const { data, error } = await apiRequest<IChange[]>('/api/changes/next', {
-        method: 'GET',
-      });
+      try {
+        const { data, error } = await apiRequest<IChange[]>('/api/changes/next', {
+          method: 'GET',
+        });
 
-      if (error) {
-        setLoading(false);
-        setChanges(null);
-        return;
+        if (!isActive) return;
+
+        if (error) {
+          setChanges(null);
+          return;
+        }
+
+        setError(false);
+        setChanges(data);
+      } finally {
+        if (isActive) setLoading(false);
       }
-
-      setLoading(false);
-      setError(false);
-      return setChanges(data);
     }
 
     fetchChanges();
+
+    return () => {
+      isActive = false;
+    };
   }, [isOnline]);
 
   if (error) {
