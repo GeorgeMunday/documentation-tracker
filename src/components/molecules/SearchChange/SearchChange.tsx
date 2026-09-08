@@ -26,7 +26,7 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
     <div className="flex w-full flex-col items-center gap-4 p-2 sm:p-4">
       <form onSubmit={handleSubmit} className="w-full max-w-xl">
         <div className="flex items-stretch gap-3">
-          <div className="relative w-full">
+          <div className="relative w-full text-black">
             <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 
             <Input

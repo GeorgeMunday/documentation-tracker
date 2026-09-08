@@ -30,7 +30,7 @@ const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
     <div className="flex w-full flex-col items-center gap-4 p-2 sm:p-4">
       {input ? (
         <div className="flex w-full justify-center">
-          <div className="relative w-full max-w-xl">
+          <div className="relative w-full max-w-xl text-black">
             <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 
             <Input
@@ -46,7 +46,7 @@ const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
         </div>
       ) : (
         <div className="flex w-full justify-center">
-          <h2 className="text-lg font-semibold">3 Most Recent Changes</h2>
+          <h2 className="text-lg font-semibold text-black">3 Most Recent Changes</h2>
         </div>
       )}
 

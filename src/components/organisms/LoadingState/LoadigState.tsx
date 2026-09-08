@@ -8,7 +8,7 @@ export default function LoadingState() {
     <div className="w-full">
       <Header />
 
-      <div className="flex w-full justify-center px-2 py-4 sm:px-4">
+      <div className="flex w-full justify-center">
         <div className="w-full max-w-5xl animate-pulse">
           <ContentField>
             <div className="w-full space-y-4 px-2 py-4">
