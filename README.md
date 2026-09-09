@@ -21,6 +21,7 @@ A Next.js application that tracks and monitors changes to APIs (Next.js and Mong
 - **Framework**: [Next.js](https://nextjs.org) with TypeScript
 - **Database**: MongoDB
 - **Styling**: CSS with Tailwind CSS support
+- **Data Fetching**: [SWR](https://swr.vercel.app/) for caching, revalidation, and request deduplication
 - **Architecture**: Component-based (atoms, molecules, organisms)
 
 ## Project Structure
@@ -37,9 +38,9 @@ src/
 │   ├── molecules/         # Component compositions (Header, Form sections)
 │   └── organisms/         # Full feature sections (Home, Search, etc.)
 └── lib/
-    ├── hooks/             # Custom React hooks
-    │   ├── useApi/        # API data fetching
-    │   └── useOnlineStatus/
+   ├── hooks/             # Custom React hooks
+   │   ├── useChanges/    # SWR change fetching and preloading
+   │   └── useOnlineStatus/
     ├── models/            # Data models
     └── mongo/             # MongoDB connection
 ```
@@ -78,14 +79,33 @@ GitHub Actions Scraper
 API Routes (/api/changes/*)
    ↓ (serves)
    │
-Custom Hooks (useApi, useOnlineStatus)
-   ↓ (fetches/manages state)
+useChanges + SWR
+   ↓ (fetches, caches, revalidates)
    │
 Components (atoms → molecules → organisms)
    ↓ (renders UI)
    │
 Pages
 ```
+
+### Data Fetching and Preloading
+
+Change pages use the shared `useChanges` hook in `src/lib/hooks/useChanges/useChanges.ts`.
+SWR provides:
+
+- Shared in-memory caching between pages
+- Request deduplication when multiple components use the same endpoint
+- Revalidation when the browser window regains focus
+- Error handling without permanently caching failed requests
+- Offline-aware requests by disabling the SWR key while the app is offline
+
+The navigation header preloads the API data for change pages when a link is hovered,
+focused, or pressed. Next.js separately prefetches the route code through `next/link`.
+The page can therefore reuse data that has already been placed in the SWR cache.
+
+The All Changes page uses SWR Infinite to cache each paginated request independently
+and load additional pages through the `Show more` control. Search results are cached
+by their encoded query URL.
 
 ## Getting Started
 
