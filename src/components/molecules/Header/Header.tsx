@@ -4,6 +4,7 @@ import Text from '@/components/atoms/Text/Text';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaBars, FaXmark } from 'react-icons/fa6';
+import { preloadChanges } from '@/lib/hooks/useChanges/useChanges';
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -14,9 +15,18 @@ const navItems = [
   { href: '/tailwind', label: 'Tailwind CSS' },
   { href: '/search', label: 'Search' },
   { href: '/all', label: 'All' },
-  // { href: '/notify', label: 'Notify' },
   { href: '/information', label: 'Info' },
 ];
+
+const preloadUrls: Record<string, string> = {
+  '/': '/api/changes/recent',
+  '/next': '/api/changes/next',
+  '/mongo': '/api/changes/mongo',
+  '/node': '/api/changes/node',
+  '/typescript': '/api/changes/typescript',
+  '/tailwind': '/api/changes/tailwind',
+  '/all': '/api/changes/all?limit=5&skip=0',
+};
 
 const Header = () => {
   const pathname = usePathname();
@@ -32,6 +42,9 @@ const Header = () => {
           href={href}
           aria-current={isActive ? 'page' : undefined}
           onClick={() => setIsMenuOpen(false)}
+          onPointerEnter={() => preloadUrls[href] && preloadChanges(preloadUrls[href])}
+          onFocus={() => preloadUrls[href] && preloadChanges(preloadUrls[href])}
+          onPointerDown={() => preloadUrls[href] && preloadChanges(preloadUrls[href])}
           className={[
             mobile ? 'w-full py-2 text-base' : 'text-lg',
             'font-semibold transition-colors duration-300',

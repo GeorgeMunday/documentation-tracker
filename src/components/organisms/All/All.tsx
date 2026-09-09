@@ -7,10 +7,10 @@ import { IChange } from '@/lib/models/Change';
 type AllProps = {
   changes: IChange[] | null;
   limit: number;
-  setSkip: (value: number | ((current: number) => number)) => void;
+  onLoadMore: () => void;
 };
 
-const All = ({ changes, limit, setSkip }: AllProps) => {
+const All = ({ changes, limit, onLoadMore }: AllProps) => {
   const hasMore = !!changes && changes.length >= limit;
 
   return (
@@ -28,7 +28,7 @@ const All = ({ changes, limit, setSkip }: AllProps) => {
             <button
               type="button"
               disabled={!hasMore}
-              onClick={() => setSkip((current) => current + limit)}
+              onClick={onLoadMore}
               className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Show more

@@ -1,8 +1,9 @@
 "use client"
 import Search from '@/components/organisms/Search/Search'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useSWR from 'swr';
 import { IChange } from '@/lib/models/Change';
-import { apiRequest } from '@/lib/hooks/useApi/useApi';
+import { fetcher } from '@/lib/hooks/useChanges/useChanges';
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import LoadingState from '@/components/organisms/LoadingState/LoadigState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
@@ -11,51 +12,15 @@ import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 const Page = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [submittedTerm, setSubmittedTerm] = useState('');
-  const [changes, setChanges] = useState<IChange[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const isOnline = useOnlineStatus();
-
-  useEffect(() => {
-    if (!isOnline) {
-      return;
-    }
-
-    let isActive = true;
-
-    const fetchChanges = async () => {
-      setLoading(true);
-
-      const query = encodeURIComponent(submittedTerm.trim());
-      const url = query ? `/api/changes/search?query=${query}` : '/api/changes/all';
-
-      try {
-        const { data, error } = await apiRequest<IChange[]>(url, {
-          method: 'GET',
-        });
-
-        if (!isActive) return;
-
-        if (error) {
-          console.warn('Changes sync unavailable:', error);
-          setChanges([]);
-          setError(true);
-          return;
-        }
-
-        setChanges(data ?? []);
-        setError(false);
-      } finally {
-        if (isActive) setLoading(false);
-      }
-    };
-
-    fetchChanges();
-
-    return () => {
-      isActive = false;
-    };
-  }, [submittedTerm, isOnline]);
+  const query = encodeURIComponent(submittedTerm.trim());
+  const url = query ? `/api/changes/search?query=${query}` : '/api/changes/all';
+  const { data, error, isLoading } = useSWR<IChange[]>(
+    isOnline ? url : null,
+    fetcher,
+    { shouldRetryOnError: false }
+  );
+  const changes = data ?? [];
 
   if (error) {
     return <ApiErrorState />;
@@ -65,7 +30,7 @@ const Page = () => {
     return <OfflineState />;
   }
 
-  if (loading && !submittedTerm.trim()) {
+  if (isLoading && !submittedTerm.trim()) {
     return <LoadingState />;
   }
 
@@ -76,7 +41,7 @@ const Page = () => {
       submittedTerm={submittedTerm}
       onSearch={() => setSubmittedTerm(searchTerm)}
       changes={changes}
-      loading={loading && Boolean(submittedTerm.trim())}
+      loading={isLoading && Boolean(submittedTerm.trim())}
     />
   );
 };

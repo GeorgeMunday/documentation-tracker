@@ -1,55 +1,16 @@
 "use client";
-import {useState, useEffect} from 'react'
 
 import Next from '@/components/organisms/Next/Next'
 
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
-import { apiRequest } from '@/lib/hooks/useApi/useApi';
-import { IChange } from '@/lib/models/Change';
+import { useChanges } from '@/lib/hooks/useChanges/useChanges';
 import LoadingState from '@/components/organisms/LoadingState/LoadigState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
 import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 
 const Page = () => {
   const isOnline = useOnlineStatus();
-  const [changes, setChanges] = useState<IChange[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-    useEffect(() => {
-    if (!isOnline) {
-      return;
-    }
-
-    let isActive = true;
-
-    async function fetchChanges() {
-      setLoading(true);
-      try {
-        const { data, error } = await apiRequest<IChange[]>('/api/changes/next', {
-          method: 'GET',
-        });
-
-        if (!isActive) return;
-
-        if (error) {
-          setChanges(null);
-          return;
-        }
-
-        setError(false);
-        setChanges(data);
-      } finally {
-        if (isActive) setLoading(false);
-      }
-    }
-
-    fetchChanges();
-
-    return () => {
-      isActive = false;
-    };
-  }, [isOnline]);
+  const { changes, loading, error } = useChanges('/api/changes/next', isOnline);
 
   if (error) {
     return <ApiErrorState />;
