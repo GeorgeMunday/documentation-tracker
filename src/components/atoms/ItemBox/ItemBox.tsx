@@ -40,9 +40,9 @@ const ItemBox = ({ title, description, timestamp, index, doctype, link }: ItemBo
   return (
     <div className="mt-2 w-full rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
       <div className="flex w-full flex-col items-start justify-start gap-2 break-words">
-        <div className="flex w-fit items-center justify-between gap-2">
+        <div className="w-fit items-center justify-between gap-2">
           {
-            index !== undefined ? (<Text size="xl" weight="bold" color="black">{index + 1}</Text>) : <></>
+            index !== undefined ? (<Text size="xl" weight="bold" color="gray-500">{index + 1}.</Text>) : <></>
           }
         <Text size="xl" weight="bold" color="black">
           {title || '1. sample text'}
