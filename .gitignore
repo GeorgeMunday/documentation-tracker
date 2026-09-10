@@ -40,5 +40,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# local planning notes
+/before_production.md
+
 .next
 node_modules
