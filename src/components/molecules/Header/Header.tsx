@@ -46,7 +46,7 @@ const Header = () => {
           onFocus={() => preloadUrls[href] && preloadChanges(preloadUrls[href])}
           onPointerDown={() => preloadUrls[href] && preloadChanges(preloadUrls[href])}
           className={[
-            mobile ? 'w-full py-2 text-base' : 'text-lg',
+            mobile ? 'w-full py-2 text-center text-base' : 'text-lg',
             'font-semibold transition-colors duration-300',
             isActive ? 'text-green-500' : 'text-black hover:text-green-500 active:text-green-500',
           ].join(' ')}
@@ -84,7 +84,7 @@ const Header = () => {
 
       {isMenuOpen && (
         <nav className="mobile-menu border-t border-gray-200 bg-white px-4 py-3">
-          <div className="flex flex-col gap-2">{renderNavLinks(true)}</div>
+          <div className="flex flex-col items-center gap-2">{renderNavLinks(true)}</div>
         </nav>
       )}
     </header>
