@@ -27,21 +27,18 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
       <form onSubmit={handleSubmit} className="w-full max-w-xl">
         <div className="flex items-stretch gap-3">
           <div className="relative w-full text-black">
-            <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-
             <Input
               name="search"
               type="text"
               placeholder="Search Recent Changes..."
               required
-              search={true}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
 
           <Button type="submit" variant="icon" aria-label="Search" disabled={loading}>
-            <FiPlayCircle className={`h-7 w-7 text-2xl${loading ? ' animate-spin' : ''}`} />
+            <FiSearch className={`h-7 w-7 text-2xl${loading ? ' animate-spin' : ''}`} />
           </Button>
         </div>
       </form>
@@ -55,6 +52,7 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
               description={change.description}
               timestamp={change.date.toString()}
               index={index}
+              id={change._id}
             />
           ))
         ) : (
