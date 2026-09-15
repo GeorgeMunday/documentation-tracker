@@ -1,7 +1,7 @@
 "use client";
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import { useChanges } from '@/lib/hooks/useChanges/useChanges';
-import LoadingState from '@/components/organisms/LoadingState/LoadigState';
+import LoadingState from '@/components/organisms/LoadingState/LoadingState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
 import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 import Tailwind from '@/components/organisms/Tailwind/Tailwind';

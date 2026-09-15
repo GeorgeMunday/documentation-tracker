@@ -5,7 +5,7 @@ import useSWR from 'swr';
 import { IChange } from '@/lib/models/Change';
 import { fetcher } from '@/lib/hooks/useChanges/useChanges';
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
-import LoadingState from '@/components/organisms/LoadingState/LoadigState';
+import LoadingState from '@/components/organisms/LoadingState/LoadingState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
 import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 

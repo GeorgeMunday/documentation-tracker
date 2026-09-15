@@ -1,6 +1,6 @@
 "use client";
 
-import LoadingState from "@/components/organisms/LoadingState/LoadigState";
+import LoadingState from "@/components/organisms/LoadingState/LoadingState";
 
 export default function Loading() {
   return <LoadingState />;

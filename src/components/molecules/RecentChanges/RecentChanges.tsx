@@ -3,6 +3,7 @@ import { FiSearch } from 'react-icons/fi';
 import Input from '@/components/atoms/Input/Input';
 import ItemBox from '@/components/atoms/ItemBox/ItemBox';
 import { IChange } from '@/lib/models/Change';
+import {RECENT_LIMIT} from '@/lib/changes/constants';
 
 type RecentChangesProps = {
   changes: IChange[] | null;
@@ -46,7 +47,7 @@ const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
         </div>
       ) : (
         <div className="flex w-full justify-center">
-          <h2 className="text-lg font-semibold text-black">3 Most Recent Changes</h2>
+          <h2 className="text-lg font-semibold text-black">{RECENT_LIMIT} Most Recent Changes</h2>
         </div>
       )}
 
@@ -54,11 +55,9 @@ const RecentChanges = ({ changes, input = true }: RecentChangesProps) => {
         {filteredChanges.map((change, index) => (
           <ItemBox
             key={change._id}
+            id={change._id}
             title={change.title}
-            description={change.description}
-            timestamp={change.date.toString()}
             index={index}
-            doctype={change.doctype}
           />
         ))}
       </div>

@@ -5,6 +5,7 @@ import {
 } from "@/lib/changes/constants";
 import {
   queryAllChanges,
+  queryChangeById,
   queryMongoChanges,
   queryNextChanges,
   queryNodeChanges,
@@ -13,6 +14,13 @@ import {
   queryTailwindChanges,
   queryTypeScriptChanges,
 } from "@/lib/changes/queries";
+
+export async function getChangeByIdCached(id: string) {
+  "use cache";
+  cacheLife({ revalidate: DEFAULT_CACHE_SECONDS });
+  cacheTag("changes", `changes-${id}`);
+  return queryChangeById(id);
+}
 
 export async function getAllChangesCached(limit: number, skip: number) {
   "use cache";

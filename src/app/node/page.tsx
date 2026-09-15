@@ -4,7 +4,7 @@ import Node from '@/components/organisms/Node/Node';
 
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import { useChanges } from '@/lib/hooks/useChanges/useChanges';
-import LoadingState from '@/components/organisms/LoadingState/LoadigState';
+import LoadingState from '@/components/organisms/LoadingState/LoadingState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
 import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 

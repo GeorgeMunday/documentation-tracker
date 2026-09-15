@@ -1,12 +1,15 @@
 "use client";
 
+import { Suspense } from 'react';
 import ContentField from '@/components/molecules/ContentField/ContentField';
 import Header from '@/components/molecules/Header/Header';
 
 export default function LoadingState() {
   return (
     <div className="w-full">
-      <Header />
+      <Suspense fallback={<div className="h-[73px] w-full border-b border-gray-200 bg-white" />}>
+        <Header />
+      </Suspense>
 
       <div className="flex w-full justify-center">
         <div className="w-full max-w-5xl animate-pulse">

@@ -40,7 +40,7 @@ const SearchChange = ({ searchTerm, setSearchTerm, submittedTerm, onSearch, chan
             />
           </div>
 
-          <Button onClick={onSearch} variant="primary" aria-label="Search" disabled={loading}>
+          <Button type="submit" variant="icon" aria-label="Search" disabled={loading}>
             <FiPlayCircle className={`h-7 w-7 text-2xl${loading ? ' animate-spin' : ''}`} />
           </Button>
         </div>

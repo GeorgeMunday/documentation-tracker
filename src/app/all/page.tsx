@@ -4,7 +4,7 @@ import useSWRInfinite from 'swr/infinite';
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import { fetcher } from '@/lib/hooks/useChanges/useChanges';
 import { IChange } from '@/lib/models/Change';
-import LoadingState from '@/components/organisms/LoadingState/LoadigState';
+import LoadingState from '@/components/organisms/LoadingState/LoadingState';
 import OfflineState from '@/components/organisms/OfflineState/OfflineState';
 import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 import All from '@/components/organisms/All/All';

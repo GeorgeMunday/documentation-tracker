@@ -6,6 +6,7 @@ import {
 import { getChangesCollection } from "@/lib/changes/collection";
 import { buildSearchFilter } from "@/lib/changes/searchFilter";
 import type { IChange } from "@/lib/models/Change";
+import { ObjectId } from "mongodb";
 
 type ChangeDocument = {
   _id?: unknown;
@@ -49,6 +50,17 @@ export async function queryAllChanges(limit: number, skip: number) {
     .toArray();
 
   return changes.map((change) => toPlainChange(change));
+}
+
+export async function queryChangeById(id: string) {
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+
+  const collection = await getChangesCollection();
+  const change = await collection.findOne({ _id: new ObjectId(id) });
+
+  return change ? toPlainChange(change) : null;
 }
 
 export async function queryRecentChanges() {
