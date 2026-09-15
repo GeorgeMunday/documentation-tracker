@@ -18,7 +18,6 @@ const Node = ({ changes }: NodeProps) => {
         <WelcomeMessage title="Most Recent Node.js Changes" message="Here are the most recent changes to Node.js." />
         <RecentChanges changes={changes} />
         <WelcomeMessage title="Links" message="Some useful links for you to check out." />
-        <Links />
       </ContentField>
       </div>
     </div>

@@ -18,7 +18,6 @@ const Tailwind = ({ changes }: TailwindProps) => {
         <WelcomeMessage title="Most Recent Tailwind CSS Changes" message="Here are the most recent changes to Tailwind CSS." />
         <RecentChanges changes={changes} />
         <WelcomeMessage title="Links" message="Some useful links for you to check out." />
-        <Links />
       </ContentField>
       </div>
     </div>

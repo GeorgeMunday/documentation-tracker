@@ -18,7 +18,6 @@ const Typescript = ({ changes }: TypescriptProps) => {
         <WelcomeMessage title="Most Recent TypeScript Changes" message="Here are the most recent changes to TypeScript." />
         <RecentChanges changes={changes} />
         <WelcomeMessage title="Links" message="Some useful links for you to check out." />
-        <Links />
       </ContentField>
       </div>
     </div>
