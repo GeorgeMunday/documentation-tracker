@@ -2,7 +2,7 @@ import React from 'react'
 
 type TextProps = {
     children: React.ReactNode
-    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
     weight?: 'thin' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black'
     color?: 'black' | 'gray-500' | 'gray-300' | 'blue-500' | 'red-500' | 'green-500'
 }
@@ -13,6 +13,8 @@ const sizes = {
     md: 'text-base',
     lg: 'text-lg',
     xl: 'text-xl',
+    xxl: 'text-2xl',
+    xxxl: 'text-3xl',
 }
 
 const weights = {
