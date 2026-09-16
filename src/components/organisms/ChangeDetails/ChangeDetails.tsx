@@ -15,6 +15,7 @@ const ChangeDetails = ({ change }: ChangeDetailsProps) => {
       <Header />
       <main className="flex w-full justify-center">
         <ContentField>
+          <WelcomeMessage title="Change Details" message="Here are the details of the change you selected." />
           <div className="flex flex-col justify-center items-center w-full">
           <ChangeDetailsContent change={change} />
           <WelcomeMessage title="Links" message="Some useful links for you to check out." />
