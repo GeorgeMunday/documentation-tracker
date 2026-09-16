@@ -16,7 +16,7 @@ const Button = ({ children, onClick, disabled, variant, href, ariaLabel, title, 
   const getVariantClasses = () => {
     switch (variant) {
       case 'primary':
-        return 'bg-green-500 text-white p-0 flex items-center justify-center'
+        return 'bg-transparent text-green-500 hover:underline w-fit flex items-center justify-center text-sm'
       case 'secondary':
         return 'bg-gray-200 text-gray-800 hover:bg-gray-300 w-fit'
       case 'tertiary':

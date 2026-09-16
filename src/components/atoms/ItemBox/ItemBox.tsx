@@ -41,7 +41,7 @@ const ItemBox = ({ id, title, index, link }: ItemBoxProps) => {
         </div>
 
         {link && (
-          <Link href={link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+          <Link href={link} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:text-green-500 hover:underline decoration-green-500">
             <Text size="sm" color="green-500">
               {link}
             </Text>
