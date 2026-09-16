@@ -7,7 +7,7 @@ type ChangeDetailsContentProps = {
 
 const ChangeDetailsContent = ({ change }: ChangeDetailsContentProps) => {
   return (
-      <div className="mt-6 flex flex-col justify-between gap-4">
+      <div className="mt-2 w-full rounded-lg border border-gray-200 bg-white p-3 sm:p-4">
         <div>
           <h1 className="mt-2 text-2xl font-bold text-black sm:text-3xl">{change.title}</h1>
         </div>
