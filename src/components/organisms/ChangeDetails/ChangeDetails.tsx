@@ -3,6 +3,7 @@ import ChangeDetailsContent from '@/components/molecules/ChangeDetailsContent/Ch
 import Header from '@/components/molecules/Header/Header';
 import type { IChange } from '@/lib/models/Change';
 import Links from '@/components/molecules/Links/Links';
+import WelcomeMessage from '@/components/molecules/WelcomeMessage/WelcomeMessage';
 
 type ChangeDetailsProps = {
   change: IChange;
@@ -15,6 +16,7 @@ const ChangeDetails = ({ change }: ChangeDetailsProps) => {
       <main className="flex w-full justify-center">
         <ContentField>
           <ChangeDetailsContent change={change} />
+          <WelcomeMessage title="Links" message="Some useful links for you to check out." />
           <Links/>
         </ContentField>
       </main>
