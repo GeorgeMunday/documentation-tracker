@@ -15,6 +15,7 @@ const navItems = [
   { href: '/tailwind', label: 'Tailwind CSS' },
   { href: '/search', label: 'Search' },
   { href: '/all', label: 'All' },
+  { href: '/subscribe', label: 'Subscribe' },
 ];
 
 const preloadUrls: Record<string, string> = {
