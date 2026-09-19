@@ -1,6 +1,8 @@
 import ContentField from '@/components/molecules/ContentField/ContentField';
 import EmailSubmit from '@/components/molecules/EmailSubmit/EmailSubmit';
 import Header from '@/components/molecules/Header/Header';
+import SendNow from '@/components/molecules/SendNow/SendNow';
+import VerifyEmail from '@/components/molecules/VerifyEmail/VerifyEmail';
 import WelcomeMessage from '@/components/molecules/WelcomeMessage/WelcomeMessage';
 
 const Subscribe = () => {
@@ -11,21 +13,19 @@ const Subscribe = () => {
 				<ContentField>
 					<WelcomeMessage
 						title="Subscribe to Our Newsletter"
-						message="This newsletter will keep you updated with the latest news and updates."
+						message="Get the latest documentation changes delivered to your inbox."
 					/>
 					<EmailSubmit />
 					<WelcomeMessage
 						title="Verify Your Email"
-						message="You will receive a confirmation email shortly."
+						message="Confirm your address to finish subscribing."
 					/>
-					<WelcomeMessage
-						title="Unsubscribe"
-						message="If you wish to unsubscribe, please click the link below."
-					/>
+					<VerifyEmail />
 					<WelcomeMessage
 						title="Send Now"
-						message="Click the button below to send your email immediately."
+						message="Prefer not to wait? Send the newest update immediately."
 					/>
+					<SendNow />
 				</ContentField>
 			</div>
 		</div>
