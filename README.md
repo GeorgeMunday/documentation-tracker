@@ -13,6 +13,8 @@ A Next.js application that tracks and monitors changes to APIs (Next.js and Mong
   - Tailwind CSS
 - **Search**: Quickly search through tracked changes
 - **Recent Changes**: View the most recent API changes at a glance
+- **Email Subscriptions**: Subscribe users and verify their email addresses
+- **On-demand Updates**: Send the latest changes to verified subscribers
 - **Online Status**: Display current connectivity status
 - **Responsive UI**: Mobile-friendly interface built with modern React components
 
@@ -29,8 +31,9 @@ A Next.js application that tracks and monitors changes to APIs (Next.js and Mong
 ```
 src/
 ├── app/                    # Next.js app router
-│   ├── api/               # API routes for fetching changes
-│   │   └── changes/       # Change endpoints (all, mongo, next)
+│   ├── api/               # API routes
+│   │   ├── changes/       # Change endpoints (all, mongo, next)
+│   │   └── subscribers/   # Subscribe, verify, and send-now endpoints
 │   ├── page.tsx           # Home page
 │   └── [page]/page.tsx    # Additional pages (information, search, etc.)
 ├── components/            # React components
@@ -41,8 +44,9 @@ src/
    ├── hooks/             # Custom React hooks
    │   ├── useChanges/    # SWR change fetching and preloading
    │   └── useOnlineStatus/
-    ├── models/            # Data models
-    └── mongo/             # MongoDB connection
+   ├── models/            # Change and subscriber models
+   ├── email/             # Brevo SMTP email delivery
+   └── mongo/             # MongoDB connection
 ```
 
 ## Architecture
@@ -71,7 +75,7 @@ The application follows the **Atomic Design** methodology for component organiza
 ```
 MongoDB
    ↑
-   │ (stores/retrieves)
+   │ (stores changes and subscribers)
    │
 GitHub Actions Scraper
    ↓ (populates)
@@ -87,6 +91,14 @@ Components (atoms → molecules → organisms)
    │
 Pages
 ```
+
+### Subscriber Email Flow
+
+1. `POST /api/subscribers/subscribe` validates the email, stores a pending subscriber in MongoDB, creates a 24-hour verification token, and sends a verification email through Brevo SMTP.
+2. `GET /api/subscribers/verify?token=<token>` verifies the subscriber and invalidates the token.
+3. `POST /api/subscribers/verify` sends a new verification email for an unverified subscriber.
+4. `POST /api/subscribers/sendnow` sends recent changes only to a verified subscriber.
+5. `POST /api/subscribers/unsubscribe` removes the subscriber from MongoDB.
 
 ### Data Fetching and Preloading
 
@@ -129,7 +141,20 @@ npm install
 ```
 
 3. Set up environment variables:
-Create a `.env.local` file in the root directory with your MongoDB connection string and other configuration.
+Create a `.env.local` file in the root directory with your MongoDB connection string and Brevo SMTP configuration:
+
+```env
+MONGODB_URI=mongodb://localhost:27017/documentation-tracker
+SMTP_HOST=smtp-relay.brevo.com
+SMTP_PORT=587
+SMTP_USER=your-brevo-smtp-login
+SMTP_PASSWORD=your-brevo-smtp-key
+SMTP_FROM=your-verified-sender@example.com
+```
+
+`SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD`, and `SMTP_FROM` are required for subscription verification and sending updates. The Brevo sender address must be verified before sending.
+
+For Vercel, add these variables in the project settings and redeploy. Do not commit `.env.local` or expose SMTP credentials in client-side code. Rotate any credentials that have been shared publicly.
 
 ### Running the Development Server
 

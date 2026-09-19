@@ -1,6 +1,7 @@
 "use client";
 
 import Home from '@/components/organisms/Home/Home';
+import useSubscribe from '@/lib/hooks/useSubscribe/useSubscribe';
 
 import useOnlineStatus from '@/lib/hooks/useOnlineStatus/useOnlineStatus';
 import { useChanges } from '@/lib/hooks/useChanges/useChanges';
@@ -11,6 +12,7 @@ import ApiErrorState from '@/components/organisms/ApiErrorState/ApiErrorState';
 const Page = () => {
   const isOnline = useOnlineStatus();
   const { changes, loading, error } = useChanges('/api/changes/recent', isOnline);
+  const { onSubscribe, subscribeMessage, subscribeIsError } = useSubscribe();
 
   if (error) {
     return <ApiErrorState />;
@@ -28,7 +30,14 @@ const Page = () => {
     );
   }
 
-  return <Home changes={changes} />;
+  return (
+    <Home
+      changes={changes}
+      onSubscribe={onSubscribe}
+      subscribeMessage={subscribeMessage}
+      subscribeIsError={subscribeIsError}
+    />
+  );
 };
 
 export default Page;
