@@ -1,10 +1,15 @@
 import { getSubscribers } from "./src/db.js";
+import { sendEmail } from "./src/send_email.js";
 
 async function main() {
     console.log("Starting monthly email sending...");
     const subscribers = await getSubscribers();
     for(const subscriber of subscribers) {
-        console.log("Sending email to:", subscriber.email);
+        await sendEmail({
+            to: subscriber.email,
+            subject: "Monthly Documentation Updates",
+            html: "<p>Here are the latest updates...</p>"
+        });
     }
 }
 
