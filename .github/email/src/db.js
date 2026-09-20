@@ -37,6 +37,7 @@ export async function getSubscribers() {
     throw new Error("MongoDB URI not found");
   }
 
+
   await mongoose.connect(mongoUri);
   try {
     const db = mongoose.connection.db;
@@ -44,7 +45,10 @@ export async function getSubscribers() {
       throw new Error("Database connection unavailable.");
     }
 
-    return await db.collection(SUBSCRIBERS_COLLECTION).find({}).toArray();
+    const collection = db.collection(SUBSCRIBERS_COLLECTION);
+    const verifiedSubscribers = await collection.find({ verified: true }).toArray();
+
+    return await verifiedSubscribers;
   } finally {
     await mongoose.disconnect();
   }

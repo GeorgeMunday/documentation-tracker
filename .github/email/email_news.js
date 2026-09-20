@@ -1,9 +1,11 @@
 import { getSubscribers } from "./src/db.js";
 
 async function main() {
-    console.log("sendEmail function called");
+    console.log("Starting monthly email sending...");
     const subscribers = await getSubscribers();
-    console.log("Subscribers found:", subscribers.length);
+    for(const subscriber of subscribers) {
+        console.log("Sending email to:", subscriber.email);
+    }
 }
 
 main().catch((err) => {

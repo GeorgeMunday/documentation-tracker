@@ -1,0 +1,30 @@
+name: Monthly Email
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'     
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: .github/email/package-lock.json
+
+      - name: Install dependencies
+        working-directory: .github/email
+        run: npm ci
+
+      - name: Run Monthly Email
+        working-directory: .github/email
+        env:
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+        run: node email_news.js
